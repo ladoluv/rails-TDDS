@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jurisdiction: 
+  entity_type: MyString
+  form_name_description: MyString
+  form_name: MyString
+  form_link: MyString
+  supplemental: MyString
+  instructions_link: MyString
+  efile_allowed: MyString
+  efile_required: MyString
+  efile_explanation: MyText
+  efile_aurthorization_name: MyString
+  efile_authorization_name_descripton: MyText
+  due_date: 2018-04-17
+  due_date_if_not_calender: MyString
+  extension_due_date: 2018-04-17
+  extension_due_date_if_not_calender: MyString
+  extension_required_or_automatic: MyString
+
+two:
+  jurisdiction: 
+  entity_type: MyString
+  form_name_description: MyString
+  form_name: MyString
+  form_link: MyString
+  supplemental: MyString
+  instructions_link: MyString
+  efile_allowed: MyString
+  efile_required: MyString
+  efile_explanation: MyText
+  efile_aurthorization_name: MyString
+  efile_authorization_name_descripton: MyText
+  due_date: 2018-04-17
+  due_date_if_not_calender: MyString
+  extension_due_date: 2018-04-17
+  extension_due_date_if_not_calender: MyString
+  extension_required_or_automatic: MyString

@@ -1,0 +1,2 @@
+class TaxSearch < ApplicationRecord
+end

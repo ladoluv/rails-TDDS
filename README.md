@@ -23,3 +23,6 @@ Things you may want to cover:
 
 * ...
 # rails-TDDS
+ <!-- 1. Please run rake task- rake upload_csv:due_date_info
+ desc "Upload due date info from csv to db"
+ 2. database.yml has details related to postgresql in development-->

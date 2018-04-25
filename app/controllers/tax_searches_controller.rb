@@ -1,5 +1,5 @@
 class TaxSearchesController < ApplicationController
-  before_action :set_tax_search, only: [:show, :update, :destroy]
+  before_action :set_tax_search, only: [:show]
 
   # GET /tax_searches
   def index
@@ -13,30 +13,6 @@ class TaxSearchesController < ApplicationController
     render json: @tax_search
   end
 
-  # POST /tax_searches
-  def create
-    @tax_search = TaxSearch.new(tax_search_params)
-
-    if @tax_search.save
-      render json: @tax_search, status: :created, location: @tax_search
-    else
-      render json: @tax_search.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /tax_searches/1
-  def update
-    if @tax_search.update(tax_search_params)
-      render json: @tax_search
-    else
-      render json: @tax_search.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /tax_searches/1
-  def destroy
-    @tax_search.destroy
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

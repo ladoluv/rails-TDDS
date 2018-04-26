@@ -6,8 +6,9 @@ namespace :upload_csv do
 
   task due_date_info: :environment do
     filename = File.join Rails.root, "public/csv/taxsearchdatabase.csv"
+    counter = 0
     CSV.foreach(filename, headers: true) do |row|
-      TaxFormDueDate.create(
+      taxformduedate = TaxFormDueDate.create(
         jurisdiction: row["jurisdiction"],
         entity_type: row["entity_type"],
         desc: row["desc"],
@@ -23,6 +24,7 @@ namespace :upload_csv do
         ext_dd: row["ext_dd"],
         fiscal_ext_dd_desc: row["fiscal_ext_dd_desc"],
       )
+      counter += 1 if taxformduedate.persisted?
     end
   end
 

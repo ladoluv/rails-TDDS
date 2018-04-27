@@ -7,7 +7,7 @@ end
 gem 'active_model_serializers','~>0.10.0.rc1'
 gem 'pg'
 
-
+gem 'dotenv-rails', groups: [:development, :test]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record

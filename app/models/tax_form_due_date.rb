@@ -1,0 +1,2 @@
+class TaxFormDueDate < ApplicationRecord
+end

@@ -26,4 +26,4 @@ Things you may want to cover:
  <!-- 1. Please run rake task- rake upload_csv:due_date_info
  desc "Upload due date info from csv to db"
  2. database.yml has details related to postgresql in development
- 3. Add .env with login credential to create database -->
+ 3. Add Loading environment variables from env files in custom location- for gem dotenv-rails->

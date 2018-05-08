@@ -3,7 +3,7 @@ class TaxFormDueDatesController < ApplicationController
 
   # GET /tax_form_due_dates
   def index
-    @tax_form_due_dates = TaxFormDueDate.all
+    @tax_form_due_dates = TaxFormDueDate.limit(10)
 
     render json: @tax_form_due_dates
   end

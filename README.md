@@ -27,3 +27,7 @@ Things you may want to cover:
  desc "Upload due date info from csv to db"
  2. database.yml has details related to postgresql in development
  3. Add Loading environment variables from env files in custom location- for gem dotenv-rails
+
+<!-- .env -files
+DB_USERNAME='kempchee'
+DB_PASSWORD='kempchee' -->

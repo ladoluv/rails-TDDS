@@ -8,7 +8,7 @@ namespace :upload_csv do
     filename = File.join Rails.root, "public/csv/taxsearchdatabase.csv"
     counter = 0
     CSV.foreach(filename, headers: true) do |row|
-      taxformduedate = TaxFormDueDate.find_or_create_by(
+      taxformduedate = TaxFormDueDate.create(
         jurisdiction: row["jurisdiction"],
         entity_type: row["entity_type"],
         desc: row["desc"],

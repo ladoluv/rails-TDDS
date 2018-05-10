@@ -3,7 +3,7 @@ class TaxFormDueDatesController < ApplicationController
 
   # GET /tax_form_due_dates
   def index
-    @tax_form_due_dates = TaxFormDueDate.limit(10)
+    @tax_form_due_dates = TaxFormDueDate.where( "jurisdiction ILIKE ? OR entity_type ILIKE ?","%#{params[:searchdata]}%","%#{params[:searchdata]}%").order(:jurisdiction)
 
     render json: @tax_form_due_dates
   end

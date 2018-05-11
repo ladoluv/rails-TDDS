@@ -3,11 +3,21 @@ class TaxFormDueDatesController < ApplicationController
 
   # GET /tax_form_due_dates
   def index
-    @tax_form_due_dates = TaxFormDueDate.where( "jurisdiction ILIKE ? OR entity_type ILIKE ?","%#{params[:searchdata]}%","%#{params[:searchdata]}%").order(:jurisdiction)
+    search = params[:searchdata]
+    entity_type = params[:type]
+    jurisdiction = params[:jurisdiction]
+    if params[:searchdata] || params[:type] || params[:jurisdiction]
+      @tax_form_due_dates = TaxFormDueDate.datasearch(search, entity_type, jurisdiction).order(:jurisdiction)
+    end
 
     render json: @tax_form_due_dates
   end
-
+  def get_dropdown
+    dropdownObj = {}
+      dropdownObj['states'] = TaxFormDueDate.pluck(:jurisdiction).uniq
+      dropdownObj['type'] = TaxFormDueDate.pluck(:entity_type).uniq
+    puts "dropdowncheck: #{dropdownObj.inspect}"
+  end
   # GET /tax_form_due_dates/1
   def show
     render json: @tax_form_due_date

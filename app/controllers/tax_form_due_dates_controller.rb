@@ -1,7 +1,7 @@
 class TaxFormDueDatesController < ApplicationController
   before_action :set_tax_form_due_date, only: [:show]
 
-  # GET /tax_form_due_dates
+  # GET /tax_form_due_dates -- params entity_type and jurisdiction -TBD
   def index
     search = params[:searchkey]
     entity_type = params[:type]
@@ -12,12 +12,17 @@ class TaxFormDueDatesController < ApplicationController
 
     render json: @tax_form_due_dates
   end
+
+
+  # *****************************************************************
+  # to be used in filter options
   def get_dropdown
     dropdownObj = {}
       dropdownObj['states'] = TaxFormDueDate.pluck(:jurisdiction).uniq
       dropdownObj['type'] = TaxFormDueDate.pluck(:entity_type).uniq
     puts "dropdowncheck: #{dropdownObj.inspect}"
   end
+  # *****************************************************************
   # GET /tax_form_due_dates/1
   def show
     render json: @tax_form_due_date

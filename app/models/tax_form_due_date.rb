@@ -1,7 +1,7 @@
 class TaxFormDueDate < ActiveRecord::Base
   extend TaxFormDueDates::Dropdown
 
-  validates_uniqueness_of   :name
+  validates_uniqueness_of   :jurisdiction, :scope => [:entity_type, :name]
 
   def self.datasearch(search, entity_type, jurisdiction)
     due_date_results = parse_query_params(search)
@@ -17,8 +17,5 @@ class TaxFormDueDate < ActiveRecord::Base
        due_date_results = due_date_results.where( "jurisdiction ILIKE ? OR entity_type ILIKE ? OR name ILIKE ?","%#{search_item}%", "%#{search_item}%", "%#{search_item}%")
     end
     return  due_date_results
-  end
-  def self.check_array
-    set_dropdown_obj
   end
 end

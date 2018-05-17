@@ -17,7 +17,6 @@ namespace :upload_csv do
         else
           @row[:ext_dd] =  Date.strptime(@row[:ext_dd], '%m/%d/%Y')
         end
-
         TaxFormDueDate.find_or_create_by(
         jurisdiction: @row[:jurisdiction],
         entity_type: @row[:entity_type],
@@ -37,5 +36,4 @@ namespace :upload_csv do
       end
     end
   end
-
 end

@@ -14,16 +14,6 @@ class TaxFormDueDatesController < ApplicationController
   end
 
 
-  # *****************************************************************
-  # to be used in filter options
-  def get_dropdown
-    dropdownObj = {}
-      dropdownObj['states'] = TaxFormDueDate.pluck(:jurisdiction).uniq
-      dropdownObj['type'] = TaxFormDueDate.pluck(:entity_type).uniq
-    puts "dropdowncheck: #{dropdownObj.inspect}"
-  end
-  # *****************************************************************
-  # GET /tax_form_due_dates/1
   def show
     render json: @tax_form_due_date
   end

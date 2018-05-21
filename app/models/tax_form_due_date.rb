@@ -1,14 +1,7 @@
 class TaxFormDueDate < ActiveRecord::Base
-  extend Dropdown
 
   validates_uniqueness_of   :jurisdiction, :scope => [:entity_type, :name]
 
-  def self.datasearch(search, entity_type, jurisdiction)
-    due_date_results = parse_query_params(search)
-    due_date_results = due_date_results.where(["jurisdiction LIKE ?", jurisdiction])  if jurisdiction.present?
-    due_date_results = due_date_results.where(["entity_type LIKE ?", entity_type])  if entity_type.present?
-    return due_date_results
-  end
 #  parse query params for any space between params and query each param independently
   def self.parse_query_params(search)
     search_value= search.downcase.gsub('%20',' ').split(' ') if search.present?

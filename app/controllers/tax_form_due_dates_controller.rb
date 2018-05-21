@@ -4,13 +4,10 @@ class TaxFormDueDatesController < ApplicationController
   # GET /tax_form_due_dates -- params entity_type and jurisdiction -TBD
   def index
     search = params[:search]
-    entity_type = params[:type]
-    jurisdiction = params[:jurisdiction]
-    if params[:search] || params[:type] || params[:jurisdiction]
-      @tax_form_due_dates = TaxFormDueDate.datasearch(search, entity_type, jurisdiction).order(:jurisdiction)
+    if params[:search]
+      @tax_form_due_dates = TaxFormDueDate.parse_query_params(search).order(:jurisdiction)
     end
-
-    render json: @tax_form_due_dates
+    render json: @tax_form_due_dates, meta: {filtersTypes: "abc"}
   end
 
 

@@ -1,5 +1,5 @@
 class TaxFormDueDate < ActiveRecord::Base
-  extend TaxFormDueDates::Dropdown
+  extend Dropdown
 
   validates_uniqueness_of   :jurisdiction, :scope => [:entity_type, :name]
 

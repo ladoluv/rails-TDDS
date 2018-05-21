@@ -1,14 +1,19 @@
 class TaxFormDueDatesController < ApplicationController
   before_action :set_tax_form_due_date, only: [:show]
 
-  # GET /tax_form_due_dates
+  # GET /tax_form_due_dates -- params entity_type and jurisdiction -TBD
   def index
-    @tax_form_due_dates = TaxFormDueDate.all
+    search = params[:search]
+    entity_type = params[:type]
+    jurisdiction = params[:jurisdiction]
+    if params[:search] || params[:type] || params[:jurisdiction]
+      @tax_form_due_dates = TaxFormDueDate.datasearch(search, entity_type, jurisdiction).order(:jurisdiction)
+    end
 
     render json: @tax_form_due_dates
   end
 
-  # GET /tax_form_due_dates/1
+
   def show
     render json: @tax_form_due_date
   end

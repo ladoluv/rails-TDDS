@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20180425200752) do
     t.text "fiscal_ext_dd_desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["jurisdiction", "entity_type", "name"], name: "validation", unique: true
   end
 
 end

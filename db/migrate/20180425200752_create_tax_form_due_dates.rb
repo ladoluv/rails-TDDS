@@ -16,7 +16,9 @@ class CreateTaxFormDueDates < ActiveRecord::Migration[5.1]
       t.date :ext_dd
       t.text :fiscal_ext_dd_desc
 
+
       t.timestamps
     end
+    add_index :tax_form_due_dates,  [:jurisdiction, :entity_type, :name], :unique => true, :name => 'validation'
   end
 end

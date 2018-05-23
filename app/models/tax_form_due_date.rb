@@ -17,7 +17,7 @@ class TaxFormDueDate < ActiveRecord::Base
 
   def self.pagination(search, page_number, page_size)
     due_date_pagination_results = parse_query_params(search, page_size)
-    due_date_pagination_results = due_date_pagination_results.offset(page_number.to_i).limit(page_size)
+    due_date_pagination_results = due_date_pagination_results.offset(page_number.to_i * page_size).limit(page_size)
     return due_date_pagination_results
   end
 

@@ -4,10 +4,15 @@ class TaxFormDueDatesController < ApplicationController
   # GET /tax_form_due_dates -- params entity_type and jurisdiction -TBD
   def index
     search = params[:search]
+    page_number = params[:page] || 0
+    #  page size can be a query param in v2
+    page_size = "2".to_i
+
     if params[:search]
-      @tax_form_due_dates = TaxFormDueDate.parse_query_params(search).order(:jurisdiction)
+      @tax_form_due_dates = TaxFormDueDate.pagination(search, page_number, page_size)
     end
-    render json: @tax_form_due_dates, meta: {filtersTypes: "abc"}
+    
+    render json: @tax_form_due_dates, meta: {info: TaxFormDueDate.pagination_meta(page_number, page_size)}
   end
 
 

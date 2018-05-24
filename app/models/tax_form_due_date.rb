@@ -10,7 +10,7 @@ class TaxFormDueDate < ActiveRecord::Base
     search_value.each do |search_item|
        due_date_results = due_date_results.where( "jurisdiction ILIKE ? OR entity_type ILIKE ? OR name ILIKE ?","%#{search_item}%", "%#{search_item}%", "%#{search_item}%")
     end
-    @total_pages = (due_date_results.length.to_f/page_size).round
+    @total_pages = due_date_results.length.to_f/page_size
     @total_results = due_date_results.length
     return  due_date_results.order(:jurisdiction)
   end
@@ -26,11 +26,7 @@ class TaxFormDueDate < ActiveRecord::Base
     info["page"] = page_number.to_i
     info["size"] = page_size
     info["results"] = @total_results
-    if (@total_results.to_s.last).to_i < page_size
-      info["total"] = @total_pages
-    else
-      info["total"] = @total_pages + 1
-    end
+    @total_results % page_size === 0 ? info["total"] = @total_pages.round : info["total"] = @total_pages.ceil
     return info
   end
 

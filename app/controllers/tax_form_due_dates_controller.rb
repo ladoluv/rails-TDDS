@@ -6,12 +6,12 @@ class TaxFormDueDatesController < ApplicationController
     search = params[:search]
     page_number = params[:page] || 0
     #  page size can be a query param in v2
-    page_size = "2".to_i
+    page_size = "5".to_i
 
     if params[:search]
       @tax_form_due_dates = TaxFormDueDate.pagination(search, page_number, page_size)
     end
-    
+
     render json: @tax_form_due_dates, meta: {info: TaxFormDueDate.pagination_meta(page_number, page_size)}
   end
 

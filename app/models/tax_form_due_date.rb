@@ -25,8 +25,12 @@ class TaxFormDueDate < ActiveRecord::Base
     info = {}
     info["page"] = page_number.to_i
     info["size"] = page_size
-    info["total"] = @total_pages
     info["results"] = @total_results
+    if (@total_results.to_s.last).to_i < page_size
+      info["total"] = @total_pages
+    else
+      info["total"] = @total_pages + 1
+    end
     return info
   end
 

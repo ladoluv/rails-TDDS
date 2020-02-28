@@ -1,21 +1,33 @@
 class TaxFormDueDate < ActiveRecord::Base
-  extend Dropdown
 
   validates_uniqueness_of   :jurisdiction, :scope => [:entity_type, :name]
-
-  def self.datasearch(search, entity_type, jurisdiction)
-    due_date_results = parse_query_params(search)
-    due_date_results = due_date_results.where(["jurisdiction LIKE ?", jurisdiction])  if jurisdiction.present?
-    due_date_results = due_date_results.where(["entity_type LIKE ?", entity_type])  if entity_type.present?
-    return due_date_results
-  end
+  @total_pages = ""
+  @total_results = ""
 #  parse query params for any space between params and query each param independently
-  def self.parse_query_params(search)
+  def self.parse_query_params(search, page_size)
     search_value= search.downcase.gsub('%20',' ').split(' ') if search.present?
     due_date_results = TaxFormDueDate.all
     search_value.each do |search_item|
        due_date_results = due_date_results.where( "jurisdiction ILIKE ? OR entity_type ILIKE ? OR name ILIKE ?","%#{search_item}%", "%#{search_item}%", "%#{search_item}%")
     end
-    return  due_date_results
+    @total_pages = due_date_results.length.to_f/page_size
+    @total_results = due_date_results.length
+    return  due_date_results.order(:jurisdiction)
   end
+
+  def self.pagination(search, page_number, page_size)
+    due_date_pagination_results = parse_query_params(search, page_size)
+    due_date_pagination_results = due_date_pagination_results.offset(page_number.to_i * page_size).limit(page_size)
+    return due_date_pagination_results
+  end
+
+  def self.pagination_meta(page_number, page_size)
+    info = {}
+    info["page"] = page_number.to_i
+    info["size"] = page_size
+    info["results"] = @total_results
+    @total_results % page_size === 0 ? info["total"] = @total_pages.round : info["total"] = @total_pages.ceil
+    return info
+  end
+
 end
